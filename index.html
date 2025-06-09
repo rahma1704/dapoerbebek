@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dapoer Bebek - Kuliner Khas Nusantara</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <h1>Dapoer Bebek</h1>
+      </div>
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <nav id="navbar">
+        <ul>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Cari menu..." />
+        <button id="clear-search" title="Hapus pencarian">&times;</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="container">
+        <h2>Rasakan Kelezatan Asli Dapoer Bebek</h2>
+        <p>Spesialis bebek goreng & bakar dengan resep rahasia turun temurun.</p>
+        <a href="#menu" id="cta-button" class="btn-primary">Lihat Menu</a>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="features-section">
+      <div class="container">
+        <h3>Menu Spesial Kami</h3>
+        <div class="feature-grid" id="menu-list">
+          <div class="feature-item clickable">
+            <img src="bebek sambal ijo.jpeg" alt="Bebek Goreng">
+            <h4>Bebek Goreng Sambal Ijo</h4>
+            <p>Bebek goreng garing disajikan dengan sambal ijo pedas segar, lalapan, dan nasi hangat.</p>
+            <p class="price" data-price="20000">Rp 20.000</p>
+            <button class="add-to-cart-btn" data-name="Bebek Goreng Sambal Ijo" data-price="20000">Tambah ke Keranjang</button>
+          </div>
+          <div class="feature-item clickable">
+            <img src="bebek bakar madu.jpeg" alt="Bebek Bakar">
+            <h4>Bebek Bakar Madu</h4>
+            <p>Dibakar perlahan dengan olesan madu dan rempah rahasia, menghasilkan rasa manis gurih.</p>
+            <p class="price" data-price="25000">Rp 25.000</p>
+            <button class="add-to-cart-btn" data-name="Bebek Bakar Madu" data-price="25000">Tambah ke Keranjang</button>
+          </div>
+          <div class="feature-item clickable">
+            <img src="paket nasi bebek.jpeg" alt="Paket Hemat">
+            <h4>Paket Nasi Bebek</h4>
+            <p>Menu hemat lengkap: nasi, bebek goreng/bakar, sambal, lalap, kerupuk, dan teh manis.</p>
+            <p class="price" data-price="23000">Rp 23.000</p>
+            <button class="add-to-cart-btn" data-name="Paket Nasi Bebek" data-price="23000">Tambah ke Keranjang</button>
+          </div>
+          <div class="feature-item clickable">
+            <img src="bebek rica rica.jpeg" alt="Bebek Rica-Rica">
+            <h4>Bebek Rica-Rica</h4>
+            <p>Rasa pedas menggigit dari rica khas Manado, menyatu dengan tekstur empuk daging bebek.</p>
+            <p class="price" data-price="25000">Rp 25.000</p>
+            <button class="add-to-cart-btn" data-name="Bebek Rica-Rica" data-price="25000">Tambah ke Keranjang</button>
+          </div>
+        </div>
+
+        <!-- Keranjang -->
+        <section id="cart" style="margin-top:40px;">
+          <h3>Keranjang Pesanan</h3>
+          <ul id="cart-items"></ul>
+          <p>Total Harga: <span id="total-price">Rp0</span></p>
+          <button id="clear-cart">Kosongkan Keranjang</button>
+        </section>
+      </div>
+    </section>
+
+    <!-- Tentang -->
+    <section id="tentang" class="about-section">
+      <div class="container">
+        <h3>Tentang Dapoer Bebek</h3>
+        <p>Kami berdedikasi menghadirkan cita rasa khas nusantara berbahan dasar bebek pilihan terbaik.</p>
+      </div>
+    </section>
+  </main>
+  <!-- FAQ Section -->
+<section id="faq" class="faq-section">
+  <div class="container">
+    <h3>FAQ</h3>
+    
+    <div class="faq-item">
+      <h4 class="faq-question">Bagaimana cara memesan menu?</h4>
+      <p class="faq-answer">Cukup klik tombol "Tambah ke Keranjang" pada menu yang Anda inginkan, lalu lihat pesanan Anda di bagian keranjang. Anda juga dapat menghapus atau menambah item sebelum checkout.</p>
+    </div>
+    
+    <div class="faq-item">
+      <h4 class="faq-question">Apakah ada layanan pesan antar?</h4>
+      <p class="faq-answer">Saat ini kami hanya melayani pesanan untuk dibawa pulang (takeaway). Untuk pemesanan dalam jumlah besar, silakan hubungi kami langsung melalui kontak yang tersedia.</p>
+    </div>
+    
+    <div class="faq-item">
+      <h4 class="faq-question">Metode pembayaran apa saja yang tersedia?</h4>
+      <p class="faq-answer">Kami menerima pembayaran tunai dan transfer bank. Silakan hubungi staf kami untuk detail pembayaran.</p>
+    </div>
+    <!-- JavaScript untuk Keranjang -->
+  <script>
+    let cart = [];
+
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+    addToCartButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const name = button.getAttribute("data-name");
+        const price = parseInt(button.getAttribute("data-price"));
+        cart.push({ name, price });
+        updateCart();
+      });
+    });
+
+    function updateCart() {
+      const cartItems = document.getElementById("cart-items");
+      const totalPrice = document.getElementById("total-price");
+      cartItems.innerHTML = "";
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - Rp${item.price.toLocaleString()}`;
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Hapus";
+        removeBtn.className = "cart-remove-btn";
+        removeBtn.addEventListener("click", () => {
+          cart.splice(index, 1);
+          updateCart();
+        });
+        li.appendChild(removeBtn);
+        cartItems.appendChild(li);
+        total += item.price;
+      });
+
+      totalPrice.textContent = `Rp${total.toLocaleString()}`;
+    }
+
+    document.getElementById("clear-cart").addEventListener("click", () => {
+      cart = [];
+      updateCart();
+    });
+
+  </script>
+  </div>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Dapoer Bebek. Semua Hak Dilindungi.</p>
+      <div class="social-links">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+</section>
+  <script src="script.js"></script>
+</body>
+</html>
